@@ -30,8 +30,7 @@ public class MyImageDecoder extends CumulativeProtocolDecoder {
             
             int len = ioBuffer.getInt();
             int client_id = ioBuffer.getInt();
-            System.out.println("原来的文件长度：" +  len);
-            System.out.println("包里面文件总长度：" + ioBuffer.remaining());
+
             //int len = MyTools.bytes2int(l);//将byte转成int
 
 
@@ -52,7 +51,7 @@ public class MyImageDecoder extends CumulativeProtocolDecoder {
                 ioBuffer.reset();
                 int length = ioBuffer.getInt();
                 client_id = ioBuffer.getInt();
-                System.out.println("接受文件长度：" +  length);
+
 
                 byte dest[] = new byte[length];
                 ioBuffer.get(dest);

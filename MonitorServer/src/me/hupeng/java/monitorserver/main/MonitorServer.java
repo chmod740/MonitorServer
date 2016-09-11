@@ -58,7 +58,7 @@ class ImageViewerFrame extends JFrame{
     
     
     public ImageViewerFrame(){
-        setTitle("ImageViewer");
+        setTitle("监控平台服务端");
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         label = new JLabel();
         add(label);

@@ -266,8 +266,8 @@ public class MinaUtil {
 
         public void messageReceived(IoSession session, Object message)
                 throws Exception {
-            System.out.println(session.getId());
-            System.out.println("messageReceived");
+//            System.out.println(session.getId());
+//            System.out.println("messageReceived");
             simpleListener.onReceive(message,session);
         }
 
