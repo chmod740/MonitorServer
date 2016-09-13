@@ -83,7 +83,13 @@ class ImageViewerFrame extends JFrame{
 			@Override
 			public void onReceive(Object obj, IoSession ioSession) {
 				MyData myData = (MyData)obj;
-				ImageIcon icon = new ImageIcon(myData.bitmap);
+				//ImageIcon icon = new ImageIcon(myData.bitmap);
+				//处理原始数据
+				try{
+					myData.bitmap = OperateImage.addString(myData.bitmap);
+				}catch(Exception e){
+					e.printStackTrace();
+				}	
 				MonitorServer.videoDatas[myData.clientId] = myData.bitmap;
 				//label.setIcon(icon);
 			}

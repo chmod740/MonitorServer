@@ -1,5 +1,8 @@
 package me.hupeng.java.monitorserver.util;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Rectangle;  
 import java.awt.image.BufferedImage;  
 import java.io.ByteArrayInputStream;
@@ -7,8 +10,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;  
 import java.io.FileInputStream;  
 import java.io.IOException;  
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;  
   
+
+
+
+
+
 
 
 import javax.imageio.ImageIO;  
@@ -126,6 +136,41 @@ public class OperateImage {
         }
     }  
       
-
+    public static byte[] addString(byte[] byte_in) throws IOException{
+    	ByteArrayInputStream is = null;  
+        ImageInputStream iis = null;  
+        try {  
+            // 读取图片文件  
+            is = new ByteArrayInputStream(byte_in);  
+            Iterator<ImageReader> it = ImageIO  
+                    .getImageReadersByFormatName("jpg");  
+            ImageReader reader = it.next();  
+            // 获取图片流  
+            iis = ImageIO.createImageInputStream(is);  
+            reader.setInput(iis, true);  
+  
+            ImageReadParam param = reader.getDefaultReadParam();  
+            Rectangle rect = new Rectangle(x, y, width, height);  
+  
+            // 提供一个 BufferedImage，将其用作解码像素数据的目标。  
+            param.setSourceRegion(rect);  
+            BufferedImage bi = reader.read(0, param);
+            Graphics g = bi.getGraphics();
+            //得到时间字符串
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date(System.currentTimeMillis());
+            g.setColor(Color.GREEN);
+            g.setFont(new Font("宋体", Font.BOLD, 25));
+            g.drawString(simpleDateFormat.format(date), 20, height-20);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bi, "jpg", baos); 
+            return baos.toByteArray();
+        } finally {  
+            if (is != null)  
+                is.close();  
+            if (iis != null)  
+                iis.close();  
+        }
+    }
   
 }  
